@@ -1,0 +1,12 @@
+<div id="test">aaaaaaaa</div>
+<script>
+  var url = document.referrer;
+  <% if @success %>
+    url = url + "?project=<%= @name %>";
+  <% else %>
+    url = url + "?error=1";
+  <% end %>
+  document.getElementById("test").innerHTML = url;
+  location.href = url;
+</script>
+
