@@ -1,29 +1,84 @@
-<h1>Listing projects</h1>
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/rhombus-list/rhombus-list.html">
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>made by</th>
-      <th>Data</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<style>
+  @font-face {
+    font-family: "Monterey";
+    src: url(../font/Monterey.ttf);
+  }
+</style>
 
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.user.name %></td>
-        <td><%= project.data %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<style>
+  html, body {
+    width: 100%;
+    margin: 0;
+    padding: 20px 0;
+    background: #607d8b;
+  }
+  rhombus-list#nav {
+    width: 100%;
+    position: absolute;
+    top: 30px;
+  }
+  rhombus-list#title {
+    width: 100%;
+    position: absolute;
+    top: 180px;
+  }
+  rhombus-list#projects {
+    width: 100%;
+    position: absolute;
+    top: 450px;
+  }
 
-<br>
+  rhombus-list /deep/ span {
+    color: #ECEFF1;
+  }
+  rhombus-list /deep/ .parts {
+    border-color: #CFD8DC;
+  }
+  rhombus-list /deep/ .parts:hover span {
+    color: #37474F;
+  }
+  rhombus-list /deep/ .parts:hover {
+    background-color: #FFFF8D;
+  }
 
-<%= link_to 'New Project', new_project_path %>
+  rhombus-list#title /deep/ span {
+    font-size: 45px;
+    font-family: 'Monterey';
+  }
+  rhombus-list#title /deep/ .parts {
+    border-style: dotted;
+  }
+  rhombus-list#title /deep/ .parts:hover span {
+    color: #ECEFF1;
+  }
+  rhombus-list#title /deep/ .parts:hover {
+    background-color: transparent;
+  }
+</style>
+
+
+<rhombus-list id="nav" side="120" border="2" num="2"></rhombus-list>
+
+<rhombus-list id="title" side="150" border="1" num="3"></rhombus-list>
+
+<rhombus-list id="projects" side="75" border="2" num="6"></rhombus-list>
+
+<script>
+  document.querySelector("rhombus-list#nav").data = [
+    {text: "About", url: "https://github.com/sosuke-k/paper-tree-client/wiki/Paper-Tree-Project"},
+    {text: "Download", url: "https://github.com/sosuke-k/paper-tree-client/releases"}
+  ];
+  document.querySelector("rhombus-list#title").data = [
+    {text: "Paper", url: "http://papertree.unzoning.com/"},
+    {text: "Tree", url: "http://papertree.unzoning.com/"},
+    {text: "Project", url: "http://papertree.unzoning.com/"}
+  ];
+  document.querySelector("rhombus-list#projects").data = [
+  <% @projects.each do |project| %>
+    {text: "<%= project.name %>", url: "/<%= project.name %>"},
+  <% end %>
+  ];
+</script>
